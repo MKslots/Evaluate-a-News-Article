@@ -2,7 +2,7 @@ function handleSubmit(event) {
   event.preventDefault()
 
   // check what text was put into the form field
-  let formText = document.getElementById('url').value
+  let url = document.getElementById('url').value
   post('http://localhost:8081/save', url)
 }
 
