@@ -2,8 +2,12 @@ function handleSubmit(event) {
   event.preventDefault()
 
   // check what text was put into the form field
-  let url = document.getElementById('url').value
-  post('http://localhost:8081/save', url)
+  let url = document.getElementById('url').value;
+  if (Client.checkURL(url)) {
+    post('http://localhost:8081/save', url)
+} else {
+    document.getElementById('inv').innerHTML = "Invalid URL";
+  }
 }
 
 const post = async (path, Url) => {
@@ -22,9 +26,9 @@ const post = async (path, Url) => {
         return res.json();
       })
       .then((res) => {         
-        document.getElementById('polarity').innerHTML = '<strong>Polarity: </strong>' + res.polarity;
-        document.getElementById('confidence').innerHTML = '<strong>Polarity Confidence: </strong>' + res.polarity_confidence.toFixed(2);
+        document.getElementById('polarity').innerHTML = "Polarity: " + res.polarity;
+        document.getElementById('confidence').innerHTML = "Confidence: " + res.polarity_confidence.toFixed(2);
       }
-)}
+      )}
 
 export { handleSubmit }
